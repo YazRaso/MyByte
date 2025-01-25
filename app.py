@@ -1,10 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import requests as r
 # Initialize flask app
 app = Flask(__name__)
 
 
-@app.route('/submit_barcode', methods=["POST"])
+@app.route('/', methods=["GET", "POST"])
 def get_barcode():
     # Check if user submitted form
     if request.method == "POST":
@@ -17,7 +17,9 @@ def get_barcode():
         if response.status_code == 200:
             # Format json to get nutrition information
             nutrition_info = response.json()["product"]["nutriments"]
-            return nutrition_info
+            return render_template("index.html", nutrition_info=nutrition_info)
+    else:
+        return render_template("index.html")
 
 
 if __name__ == "__main__":
