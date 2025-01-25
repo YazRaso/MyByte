@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
 import requests as r
 # Initialize flask app
-app   = Flask(__name__)
+app = Flask(__name__)
+
+
 @app.route('/submit_barcode', methods=["POST"])
 def get_barcode():
     # Check if user submitted form
@@ -16,6 +18,7 @@ def get_barcode():
             # Format json to get nutrition information
             nutrition_info = response.json()["product"]["nutriments"]
             return nutrition_info
+
 
 if __name__ == "__main__":
     app.run(debug=True)
