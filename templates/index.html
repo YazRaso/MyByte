@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <h3>MyByte</h3>
+    <form action="{{ url_for('get_barcode') }}" method="post">
+        <label for="barcode">Barcode number</label>
+        <input type="text" id="barcode" name="barcode_num" required>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="nutrition-results"></div>
+</main>
+{% endblock %} 
