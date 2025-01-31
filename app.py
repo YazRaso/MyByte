@@ -1,3 +1,7 @@
+# git repo: https://github.com/YazRaso/MyByte/tree/main
+# flask docs: https://flask.palletsprojects.com/en/stable/quickstart/
+# api docs: https://openfoodfacts.github.io/openfoodfacts-server/api/
+# 3017624010701 - sample barcode
 from flask import Flask, request, jsonify, render_template
 import requests as r
 # Initialize flask app
