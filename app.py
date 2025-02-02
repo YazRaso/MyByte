@@ -2,6 +2,7 @@
 # flask docs: https://flask.palletsprojects.com/en/stable/quickstart/
 # api docs: https://openfoodfacts.github.io/openfoodfacts-server/api/
 # 3017624010701 - sample barcode
+# https://world.openfoodfacts.org/api/v2/product/3017624010701
 from flask import Flask, request, jsonify, render_template
 import requests as r
 

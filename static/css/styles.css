@@ -25,6 +25,7 @@ nav {
     background-color: #444;
     padding: 10px;
     text-align: center;
+    display: flex;
 }
 
 nav a {
