@@ -33,3 +33,14 @@ def barcode_scan():
         return jsonify(nutrition_info)
     else:
         return jsonify({"error": "Barcode not found!"}), 404
+
+@app.route('/sign_in', methods=["GET", "POST"])
+def sign_in():
+    return render_template("sign_in.html")
+
+@app.route('/sign_up', methods=["GET", "POST"])
+def sign_up():
+    return render_template("sign_up.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
