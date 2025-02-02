@@ -8,10 +8,10 @@
         <input type="text" id="barcode" name="barcode" required>
         <button type="submit">Submit</button>
     </form>
+    {% if nutrition_info %}
     <div>
-        {% if nutrition_info %}
-            {{ nutrition_info }}
-        {% endif %}
+        {{ nutrition_info }}
     </div>
+    {% endif %}
 </main>
 {% endblock %} 
