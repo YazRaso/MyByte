@@ -36,10 +36,17 @@ def barcode_scan():
 
 @app.route('/sign_in', methods=["GET", "POST"])
 def sign_in():
+    if request.method == "POST":
+        return render_template("index.html")
     return render_template("sign_in.html")
 
 @app.route('/sign_up', methods=["GET", "POST"])
 def sign_up():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        print(username, password)
+        return render_template("index.html")
     return render_template("sign_up.html")
 
 if __name__ == "__main__":
