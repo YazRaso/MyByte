@@ -1,26 +1,30 @@
 from flask import Flask, request, jsonify, render_template
 import requests as r
-# Initialize flask app
+
 app = Flask(__name__)
 
-
 @app.route('/', methods=["GET", "POST"])
-def get_barcode():
-    # Check if user submitted form
+def home():
+    nutrition_info = None
+    error = None
+    
     if request.method == "POST":
-        # Get barcode number from form
-        barcode_number = request.form.get('barcode')
-        # Retrieve data from OFF, fields=nutriments ensures we get the nutrition information specifically
-        # TODO: It is probably best practice to store the api url in a .env file
-        response = r.get(f"https://world.openfoodfacts.net/api/v2/product/{barcode_number}?fields=nutriments")
-        # Check if our request was successful
+        barcode_number = request.form.get("barcode_number")
+        response = r.get(f"https://world.openfoodfacts.org/api/v2/product/{barcode_number}?fields=nutriments")
         if response.status_code == 200:
-            # Format json to get nutrition information
             nutrition_info = response.json()["product"]["nutriments"]
-            return render_template("index.html", nutrition_info=nutrition_info)
+        else:
+            error = "Barcode not found!"
+
+    return render_template("index.html", nutrition_info=nutrition_info, error=error)
+
+@app.route('/scan', methods=["POST"])
+def barcode_scan():
+    barcode_number = request.get_json().get('barcode')
+    response = r.get(f"https://world.openfoodfacts.org/api/v2/product/{barcode_number}?fields=nutriments")
+    print(response.status_code)
+    if response.status_code == 200:
+        nutrition_info = response.json().get("product", {}).get("nutriments", {})
+        return jsonify(nutrition_info)
     else:
-        return render_template("index.html")
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
+        return jsonify({"error": "Barcode not found!"}), 404
