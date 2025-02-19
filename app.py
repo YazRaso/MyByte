@@ -1,13 +1,8 @@
-# git repo: https://github.com/YazRaso/MyByte/tree/main
-# flask docs: https://flask.palletsprojects.com/en/stable/quickstart/
-# api docs: https://openfoodfacts.github.io/openfoodfacts-server/api/
-# 3017624010701 - sample barcode
-# https://world.openfoodfacts.org/api/v2/product/3017624010701
 from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 import requests as r
 
 app = Flask(__name__)
-
 @app.route('/', methods=["GET", "POST"])
 def home():
     nutrition_info = None
